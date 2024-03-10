@@ -18,4 +18,9 @@ func (h *Handler) getAllRequest(c *gin.Context) {
 }
 
 func (h *Handler) Test(c *gin.Context) {
+	var data []models.Test
+
+	db.DB.Find(&data)
+
+	c.JSON(200, data)
 }
