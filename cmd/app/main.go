@@ -1,13 +1,14 @@
 package main
 
-import "github.com/labstack/echo/v4"
+import (
+	"github.com/Fox1N69/rest-tsc"
+	"github.com/Fox1N69/rest-tsc/internal/handlers"
+	log	"github.com/sirupsen/logrus"
+)
 
 func main() {
-	e := echo.New()
+	handlers := new(handler.Handler)
+	srv := new(server.Server)
 
-	e.GET("/", func(c echo.Context) error {
-		return nil
-	})
-
-	e.Start(":8000")
+	log.Fatal(srv.Run("8000", handlers.InitRouting()))
 }
