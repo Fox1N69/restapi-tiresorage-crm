@@ -1,9 +1,11 @@
 package main
 
 import (
-	"github.com/Fox1N69/rest-tsc"
-	"github.com/Fox1N69/rest-tsc/internal/handlers"
-	log	"github.com/sirupsen/logrus"
+	"context"
+
+	server "github.com/Fox1N69/rest-tsc"
+	handler "github.com/Fox1N69/rest-tsc/internal/handlers"
+	log "github.com/sirupsen/logrus"
 )
 
 func main() {
@@ -11,4 +13,5 @@ func main() {
 	srv := new(server.Server)
 
 	log.Fatal(srv.Run("8000", handlers.InitRouting()))
+	log.Fatal(srv.Shutdown(context.Background()))
 }
