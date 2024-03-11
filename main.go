@@ -4,7 +4,6 @@ import (
 	"crud-crm/pkg/database"
 	"crud-crm/pkg/handlers"
 	"crud-crm/pkg/routers"
-	"strconv"
 
 	"github.com/gofiber/fiber/v3"
 	log "github.com/sirupsen/logrus"
@@ -22,11 +21,3 @@ func main() {
 	log.Fatal(app.Listen(":4000"))
 }
 
-func ConverUint(str string) uint {
-	num, err := strconv.Atoi(str)
-	if err != nil {
-		panic(err)
-	}
-
-	return uint(num)
-}

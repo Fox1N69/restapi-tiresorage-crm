@@ -1,8 +1,6 @@
 package handlers
 
 import (
-	"crud-crm/pkg/repository"
-
 	"github.com/gofiber/fiber/v3"
 )
 
@@ -12,8 +10,9 @@ func (h *Handler) GetAllClients(c fiber.Ctx) error {
 
 func (h *Handler) GetClientByID(c fiber.Ctx) error {
 	id := c.Params("id")
+	clientID := ConverUint(id)
 
-	user, err := h.mainRepo.Client.GetClientByID(uint(clientID))
+	user, err := h.mainRepo.Client.GetClientByID(clientID)
 	if err != nil {
 		return err
 	}
