@@ -7,14 +7,18 @@ import (
 )
 
 type Router struct {
+	handler handlers.Handler
 }
 
-func RouterSetup(app *fiber.App, h handlers.Handler) {
+func NewRouter(h handlers.Handler) *Router {
+	return &Router{handler: h}
+}
+
+func (r *Router) RouterSetup(app *fiber.App) {
 	api := app.Group("/api")
 	{
-		api.Get("/get-clients", h.GetAllClients)
-		api.Get("/get-crequests", h.GetAllCrequests)
+		api.Get("/clients", r.handler.GetAllClients)
+		api.Get("/get-crequests", r.handler.GetAllCrequests)
 	}
 
 }
- 
