@@ -10,16 +10,23 @@ type ClientRepository struct {
 	db *gorm.DB
 }
 
+type ClientRepositoryI interface {
+	CreateClient(client *models.Client) error
+	GetClientByID(id uint) (*models.Client, error)
+	UpdateClient(client *models.Client) error
+	DeleteClient(client *models.Client) error
+}
+
 func NewClientRepository(db *gorm.DB) *ClientRepository {
 	return &ClientRepository{}
 }
 
-func (r *ClientRepository) CreateClient(client *models.Clients) error {
+func (r *ClientRepository) CreateClient(client *models.Client) error {
 	return r.db.Create(&client).Error
 }
 
-func (r *ClientRepository) GetClientByID(id uint) (*models.Clients, error) {
-	var client models.Clients
+func (r *ClientRepository) GetClientByID(id uint) (*models.Client, error) {
+	var client models.Client
 	if err := r.db.First(&client, id).Error; err != nil {
 		return nil, err
 	}
@@ -27,10 +34,10 @@ func (r *ClientRepository) GetClientByID(id uint) (*models.Clients, error) {
 	return &client, nil
 }
 
-func (r *ClientRepository) UpdateClient(client *models.Clients) error {
+func (r *ClientRepository) UpdateClient(client *models.Client) error {
 	return r.db.Save(&client).Error
 }
 
-func (r *ClientRepository) DeleteClient(client *models.Clients) error {
+func (r *ClientRepository) DeleteClient(client *models.Client) error {
 	return r.db.Delete(&client).Error
 }
