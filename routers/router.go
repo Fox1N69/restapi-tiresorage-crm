@@ -12,7 +12,8 @@ type Router struct {
 func RouterSetup(app *fiber.App, h handlers.Handler) {
 	api := app.Group("/api")
 	{
-		api.Get("/getall", h.Test)
+		api.Get("/get-clients", h.GetAllClients)
+		api.Get("/get-crequests", h.GetAllCrequests)
 	}
 
 }

@@ -4,20 +4,21 @@ import (
 	"crud-crm/database/models"
 
 	"github.com/sirupsen/logrus"
-	"gorm.io/gorm"
 	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 )
 
 var DB *gorm.DB
 
 func InitDB() *gorm.DB {
-	dsn := "user=postgres password=123456 dbname=postgres port=5432 sslmode=disable TimeZone=Asia/Taipei"
+	dsn := "user=postgres password=8008 dbname=deplom-makar port=5432 sslmode=disable"
 	DB, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
-		logrus.Fatal(err)
+		logrus.Fatal("Connect database ", err)
 	}
 
 	DB.AutoMigrate(&models.Clients{})
+	logrus.Println("Database migrate...")
 
 	return DB
 }

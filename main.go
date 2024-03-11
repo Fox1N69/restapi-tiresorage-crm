@@ -13,8 +13,8 @@ func main() {
 	app := fiber.New(fiber.Config{
 		ServerHeader: "Fiber",
 	})
-	database.InitDB()
 
+	log.Infoln("database connect...", database.InitDB())
 	routers.RouterSetup(app, handlers.Handler{})
 
 	app.Get("/", func(c fiber.Ctx) error {
