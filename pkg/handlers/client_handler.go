@@ -1,11 +1,20 @@
 package handlers
 
 import (
+	"crud-crm/pkg/models"
+
 	"github.com/gofiber/fiber/v3"
 )
 
 func (h *Handler) GetAllClients(c fiber.Ctx) error {
 	return nil
+}
+
+func (h *Handler) CreateClient(c fiber.Ctx) error {
+	var data models.Client
+	client := h.mainRepo.Client.CreateClient(&data)
+	
+	return c.JSON(client)
 }
 
 func (h *Handler) GetClientByID(c fiber.Ctx) error {
