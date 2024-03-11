@@ -2,19 +2,23 @@ package handlers
 
 import (
 	"crud-crm/pkg/models"
+	"encoding/json"
 
 	"github.com/gofiber/fiber/v3"
 )
-
 
 func (h *Handler) GetAllClients(c fiber.Ctx) error {
 	return nil
 }
 
 func (h *Handler) CreateClient(c fiber.Ctx) error {
-	client := models.Client{}
+	client := new(models.Client)
+	if err := json.Unmarshal(c.Body(), &client); err != nil {
+		return err
+	}
+	
 
-	if err := h.mainRepo.Client.CreateClient(&client); err != nil {
+	if err := h.mainRepo.Client.CreateClient(client); err != nil {
 		panic(err)
 	}
 
