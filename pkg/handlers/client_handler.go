@@ -6,6 +6,5 @@ import (
 
 
 func (h *Handler) GetAllClients(c fiber.Ctx) error {
-
 	return nil
 }
