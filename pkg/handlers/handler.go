@@ -3,10 +3,9 @@ package handlers
 import "crud-crm/pkg/repository"
 
 type Handler struct {
-	clientRepo *repository.ClientRepository
+	mainRepo repository.MainRepository
 }
 
-func NewHandler(clientRepo *repository.ClientRepository) *Handler {
-	return &Handler{clientRepo: clientRepo}
+func NewHandler(mainRepo repository.MainRepository) *Handler {
+	return &Handler{mainRepo: mainRepo}
 }
-
