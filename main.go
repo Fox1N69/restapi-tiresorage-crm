@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crud-crm/database"
 	"crud-crm/handlers"
 	"crud-crm/routers"
 
@@ -12,6 +13,7 @@ func main() {
 	app := fiber.New(fiber.Config{
 		ServerHeader: "Fiber",
 	})
+	database.InitDB()
 
 	routers.RouterSetup(app, handlers.Handler{})
 
