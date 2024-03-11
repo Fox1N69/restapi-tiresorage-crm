@@ -31,7 +31,7 @@ func (r *ClientRepository) CreateClient(client *models.Client) error {
 
 func (r *ClientRepository) GetClientByID(id uint) (*models.Client, error) {
 	var client models.Client
-	if err := r.db.First(&client, id).Error; err != nil {
+	if err := r.db.Where("id = ?", id).First(&client).Error; err != nil {
 		return nil, err
 	}
 
