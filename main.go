@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	db := database.InitDB()
+	db := database.GetDB()
 
 	mainRepo := repository.NewMainRepository(db)
 	handler := handlers.NewHandler(*mainRepo)

@@ -2,6 +2,7 @@ package database
 
 import (
 	"crud-crm/pkg/models"
+	"time"
 
 	"github.com/sirupsen/logrus"
 	"gorm.io/driver/postgres"
@@ -10,7 +11,7 @@ import (
 
 var DB *gorm.DB
 
-func InitDB() *gorm.DB {
+func InitGormDB() *gorm.DB {
 	dsn := "user=postgres password=8008 dbname=deplom-makar port=5432 sslmode=disable"
 	DB, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
@@ -19,6 +20,22 @@ func InitDB() *gorm.DB {
 	logrus.Infoln("Database connect...")
 
 	DB.AutoMigrate(&models.Client{})
+	DB.Exec("ALTER SEQUENCE posts_id_seq RESTART WITH 1")
+
+	return DB
+}
+
+func GetDB() *gorm.DB {
+	if DB == nil {
+		DB = InitGormDB()
+		var sleep = time.Duration(1)
+		for DB == nil {
+			sleep = sleep * 2
+			logrus.Infoln("Database is unavaibl. Wait for %d sec.\n")
+			time.Sleep(sleep * time.Second)
+			DB = InitGormDB()
+		}
+	}
 
 	return DB
 }
