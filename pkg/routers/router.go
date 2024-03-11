@@ -1,7 +1,7 @@
 package routers
 
 import (
-	"crud-crm/handlers"
+	"crud-crm/pkg/handlers"
 
 	"github.com/gofiber/fiber/v3"
 )

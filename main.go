@@ -1,9 +1,9 @@
 package main
 
 import (
-	"crud-crm/database"
-	"crud-crm/handlers"
-	"crud-crm/routers"
+	"crud-crm/pkg/database"
+	"crud-crm/pkg/handlers"
+	"crud-crm/pkg/routers"
 
 	"github.com/gofiber/fiber/v3"
 	log "github.com/sirupsen/logrus"

@@ -1,5 +1,6 @@
 package models
 
+
 type Crequests struct {
 	ID           uint   `json:"id"`
 	FIO          string `json:"fio"`
