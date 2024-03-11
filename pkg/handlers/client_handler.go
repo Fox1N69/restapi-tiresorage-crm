@@ -31,6 +31,7 @@ func (h *Handler) GetClientByID(c fiber.Ctx) error {
 			"message": "ID empty",
 		})
 	}
+	
 	clientID, err := h.ConvertUint(id)
 	if err != nil {
 		return err
