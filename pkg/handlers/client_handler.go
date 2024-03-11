@@ -77,5 +77,27 @@ func (h *Handler) UpdateClient(c fiber.Ctx) error {
 }
 
 func (h *Handler) DeleteClient(c fiber.Ctx) error {
-	return nil
+	id := c.Params("id")
+	if id == "" {
+		c.Status(400).JSON(fiber.Map{
+			"message": "ID empty",
+		})
+	}
+	clientID, err := h.ConvertUint(id) 
+	if err != nil {
+		return err
+	}
+
+	exitClient, err := h.mainRepo.Client.GetClientByID(clientID)
+	if err != nil {
+		return err
+	}
+
+	if err := h.mainRepo.Client.DeleteClient(exitClient); err != nil {
+		return err
+	}
+
+	return c.JSON(fiber.Map{
+		"message": "Client seccessfully deleted",
+	})
 }
