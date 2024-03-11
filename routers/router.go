@@ -17,3 +17,4 @@ func RouterSetup(app *fiber.App, h handlers.Handler) {
 	}
 
 }
+ 

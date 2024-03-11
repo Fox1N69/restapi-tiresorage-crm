@@ -1,8 +1,6 @@
 package database
 
 import (
-	"crud-crm/database/models"
-
 	"github.com/sirupsen/logrus"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -16,9 +14,6 @@ func InitDB() *gorm.DB {
 	if err != nil {
 		logrus.Fatal("Connect database ", err)
 	}
-
-	DB.AutoMigrate(&models.Clients{})
-	logrus.Println("Database migrate...")
 
 	return DB
 }
