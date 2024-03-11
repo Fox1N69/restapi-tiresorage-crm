@@ -27,6 +27,8 @@ func (r *Router) RouterSetup(app *fiber.App) {
 			client.Get("/", r.handler.GetAllClients)
 			client.Post("/set", r.handler.CreateClient)
 			client.Get("/:id", r.handler.GetClientByID)
+			client.Put("/:id", r.handler.UpdateClient)
+			client.Delete("/:id", r.handler.DeleteClient)
 		}
 
 	}

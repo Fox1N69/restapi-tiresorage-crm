@@ -16,7 +16,6 @@ func (h *Handler) CreateClient(c fiber.Ctx) error {
 	if err := json.Unmarshal(c.Body(), &client); err != nil {
 		return err
 	}
-	
 
 	if err := h.mainRepo.Client.CreateClient(client); err != nil {
 		panic(err)
@@ -40,4 +39,12 @@ func (h *Handler) GetClientByID(c fiber.Ctx) error {
 	}
 
 	return c.JSON(user)
+}
+
+func (h *Handler) UpdateClient(c fiber.Ctx) error {
+	return nil
+}
+
+func (h *Handler) DeleteClient(c fiber.Ctx) error {
+	return nil
 }
