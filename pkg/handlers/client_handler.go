@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"crud-crm/pkg/database"
 	"crud-crm/pkg/models"
 	"encoding/json"
 
@@ -42,7 +43,29 @@ func (h *Handler) GetClientByID(c fiber.Ctx) error {
 }
 
 func (h *Handler) UpdateClient(c fiber.Ctx) error {
-	return nil
+	var client models.Client
+	id := c.Params("id")
+	if id == "" {
+		c.Status(400).JSON(fiber.Map{
+			"message": "ID empty",
+		})
+	}
+
+	if err := database.DB.Where("id = ?").First(&client).Error; err != nil {
+		return err
+	}
+
+	if err := json.Unmarshal(c.Body(), &client); err != nil {
+		return err
+	}
+
+	if err := h.mainRepo.Client.UpdateClient(&client); err != nil {
+		return err
+	}
+
+	return c.Status(200).JSON(fiber.Map{
+		"message": "client seccessfully change",
+	})
 }
 
 func (h *Handler) DeleteClient(c fiber.Ctx) error {
