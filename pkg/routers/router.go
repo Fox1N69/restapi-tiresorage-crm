@@ -23,6 +23,7 @@ func (r *Router) RouterSetup(app *fiber.App) {
 	api := app.Group("/api")
 	{
 		api.Get("/clients", r.handler.GetAllClients)
+		api.Get("/client:id", r.handler.GetClientByID)
 		api.Get("/get-crequests", r.handler.GetAllCrequests)
 	}
 
