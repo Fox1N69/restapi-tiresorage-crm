@@ -16,11 +16,11 @@ func NewHandler(mainRepo repository.MainRepository) *Handler {
 	return &Handler{mainRepo: mainRepo}
 }
 
-func ConverUint(str string) uint {
+func (h *Handler) ConvertUint(str string) (uint, error) {
 	num, err := strconv.ParseUint(str, 10, 64)
 	if err != nil {
-		panic(err)
+		return 0, err
 	}
 
-	return uint(num)
+	return uint(num), nil
 }

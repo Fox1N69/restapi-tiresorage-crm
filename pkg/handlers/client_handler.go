@@ -31,7 +31,10 @@ func (h *Handler) GetClientByID(c fiber.Ctx) error {
 			"message": "ID empty",
 		})
 	}
-	clientID := ConverUint(id)
+	clientID, err := h.ConvertUint(id)
+	if err != nil {
+		return err
+	}
 
 	user, err := h.mainRepo.Client.GetClientByID(clientID)
 	if err != nil {
@@ -48,7 +51,11 @@ func (h *Handler) UpdateClient(c fiber.Ctx) error {
 			"message": "ID empty",
 		})
 	}
-	clientID := ConverUint(id)
+
+	clientID, err := h.ConvertUint(id)
+	if err != nil {
+		return err
+	}
 
 	var client models.Client
 
