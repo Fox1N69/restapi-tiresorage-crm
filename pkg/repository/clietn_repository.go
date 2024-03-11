@@ -2,6 +2,7 @@ package repository
 
 import (
 	"crud-crm/pkg/models"
+	"errors"
 
 	"gorm.io/gorm"
 )
@@ -22,6 +23,9 @@ func NewClientRepository(db *gorm.DB) *ClientRepository {
 }
 
 func (r *ClientRepository) CreateClient(client *models.Client) error {
+	if r == nil {
+		return errors.New("ClientRepository is null")
+	}
 	return r.db.Create(client).Error
 }
 

@@ -6,14 +6,18 @@ import (
 	"github.com/gofiber/fiber/v3"
 )
 
+
 func (h *Handler) GetAllClients(c fiber.Ctx) error {
 	return nil
 }
 
 func (h *Handler) CreateClient(c fiber.Ctx) error {
-	var data models.Client
-	client := h.mainRepo.Client.CreateClient(&data)
-	
+	client := models.Client{}
+
+	if err := h.mainRepo.Client.CreateClient(&client); err != nil {
+		panic(err)
+	}
+
 	return c.JSON(client)
 }
 
