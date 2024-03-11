@@ -45,4 +45,3 @@ func (r *ClientRepository) UpdateClient(client *models.Client) error {
 func (r *ClientRepository) DeleteClient(client *models.Client) error {
 	return r.db.Delete(&client).Error
 }
-
