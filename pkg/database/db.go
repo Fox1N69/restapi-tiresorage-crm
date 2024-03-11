@@ -16,6 +16,7 @@ func InitDB() *gorm.DB {
 	if err != nil {
 		logrus.Fatal("Connect database ", err)
 	}
+	logrus.Infoln("Database connect...")
 
 	DB.AutoMigrate(&models.Client{})
 

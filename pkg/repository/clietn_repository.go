@@ -18,11 +18,11 @@ type ClientRepositoryI interface {
 }
 
 func NewClientRepository(db *gorm.DB) *ClientRepository {
-	return &ClientRepository{}
+	return &ClientRepository{db: db}
 }
 
 func (r *ClientRepository) CreateClient(client *models.Client) error {
-	return r.db.Create(&client).Error
+	return r.db.Create(client).Error
 }
 
 func (r *ClientRepository) GetClientByID(id uint) (*models.Client, error) {

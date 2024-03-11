@@ -11,7 +11,9 @@ func (h *Handler) GetAllClients(c fiber.Ctx) error {
 func (h *Handler) GetClientByID(c fiber.Ctx) error {
 	id := c.Params("id")
 	if id == "" {
-		c.JSON("ID empty")
+		c.Status(400).JSON(fiber.Map{
+			"message": "ID empty",
+		})
 	}
 	clientID := ConverUint(id)
 
@@ -20,6 +22,5 @@ func (h *Handler) GetClientByID(c fiber.Ctx) error {
 		panic(err)
 	}
 
-	
-	return c.JSON(&user)
+	return c.JSON(user)
 }

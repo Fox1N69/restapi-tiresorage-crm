@@ -13,11 +13,11 @@ func main() {
 	app := fiber.New(fiber.Config{
 		ServerHeader: "Fiber",
 	})
-	log.Infoln("database connect...", database.InitDB())
+
+	database.InitDB()
 
 	router := routers.NewRouter(handlers.Handler{})
 	router.RouterSetup(app)
 
 	log.Fatal(app.Listen(":4000"))
 }
-
