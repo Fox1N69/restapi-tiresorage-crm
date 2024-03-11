@@ -10,7 +10,7 @@ import (
 // создание структуры router с полем handler
 type Router struct {
 	handler handlers.Handler
-	repo repository.ClientRepository
+	mainRepo repository.MainRepository
 }
 
 //новый экземпляр типа router с обработчиком handler
