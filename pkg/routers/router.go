@@ -30,7 +30,11 @@ func (r *Router) RouterSetup(app *fiber.App) {
 			client.Put("/:id", r.handler.UpdateClient)
 			client.Delete("/:id", r.handler.DeleteClient)
 		}
+		crequest := api.Group("/crequest")
+		{
+			crequest.Get("/", r.handler.GetAllCrequests)
+			crequest.Post("/set", r.handler.CreateCreques)
+		}
 
 	}
-
 }
