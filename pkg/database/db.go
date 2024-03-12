@@ -31,7 +31,7 @@ func GetDB() *gorm.DB {
 		var sleep = time.Duration(1)
 		for DB == nil {
 			sleep = sleep * 2
-			logrus.Infoln("Database is unavaibl. Wait for %d sec.\n")
+			logrus.Infoln("Database is unavaibl. Wait for sec")
 			time.Sleep(sleep * time.Second)
 			DB = InitGormDB()
 		}
