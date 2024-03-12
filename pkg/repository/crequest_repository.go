@@ -2,6 +2,7 @@ package repository
 
 import (
 	"crud-crm/pkg/models"
+	"errors"
 
 	"gorm.io/gorm"
 )
@@ -22,17 +23,24 @@ func NewCrequestRepository(db *gorm.DB) *CrequestRepository {
 }
 
 func (cr *CrequestRepository) CreateCrequest(crequest models.Crequests) error {
-	return nil
+	if cr == nil {
+		return errors.New("CrequestRepository is null")
+	}
+	return cr.db.Create(&crequest).Error
 }
 
 func (cr *CrequestRepository) GetCrequestByID(id uint) (*models.Crequests, error) {
-	return nil, nil
+	var crequest models.Crequests
+	if err := cr.db.Where("id = ?", id).First(&crequest).Error; err != nil {
+		return nil, err
+	}
+	return &crequest, nil
 }
 
 func (cr *CrequestRepository) UpdateCrequest(crequest models.Crequests) error {
-	return nil
+	return cr.db.Save(&crequest).Error
 }
 
 func (cr *CrequestRepository) DeleteCrequest(crequest models.Crequests) error {
-	return nil
+	return cr.db.Delete(&crequest).Error
 }
