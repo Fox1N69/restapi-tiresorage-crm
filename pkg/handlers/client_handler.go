@@ -83,7 +83,7 @@ func (h *Handler) DeleteClient(c fiber.Ctx) error {
 			"message": "ID empty",
 		})
 	}
-	clientID, err := h.ConvertUint(id) 
+	clientID, err := h.ConvertUint(id)
 	if err != nil {
 		return err
 	}
@@ -92,6 +92,7 @@ func (h *Handler) DeleteClient(c fiber.Ctx) error {
 	if err != nil {
 		return err
 	}
+
 
 	if err := h.mainRepo.Client.DeleteClient(exitClient); err != nil {
 		return err

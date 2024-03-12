@@ -43,5 +43,10 @@ func (r *ClientRepository) UpdateClient(client *models.Client) error {
 }
 
 func (r *ClientRepository) DeleteClient(client *models.Client) error {
+	if err := r.db.Exec("ALTER SEQUENCE clients_id_seq RESTART WITH 1").Error; err != nil {
+		r.db.Rollback()
+		return err
+	}
+
 	return r.db.Delete(&client).Error
 }
