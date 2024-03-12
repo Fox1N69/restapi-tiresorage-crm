@@ -33,7 +33,8 @@ func (r *Router) RouterSetup(app *fiber.App) {
 		crequest := api.Group("/crequest")
 		{
 			crequest.Get("/", r.handler.GetAllCrequests)
-			crequest.Post("/set", r.handler.CreateCreques)
+			crequest.Post("/set", r.handler.CreateCrequest)
+			crequest.Get("/:id", r.handler.GetCrequestByID)
 		}
 
 	}
