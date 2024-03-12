@@ -13,3 +13,11 @@ func (h *Handler) CreateCrequest(c fiber.Ctx) error {
 func (h *Handler) GetCrequestByID(c fiber.Ctx) error {
 	return nil
 }
+
+func (h *Handler) UpdateCrequest(c fiber.Ctx) error {
+	return nil
+}
+
+func (h *Handler) DeleteCrequest(c fiber.Ctx) error {
+	return nil
+}

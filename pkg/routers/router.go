@@ -35,6 +35,8 @@ func (r *Router) RouterSetup(app *fiber.App) {
 			crequest.Get("/", r.handler.GetAllCrequests)
 			crequest.Post("/set", r.handler.CreateCrequest)
 			crequest.Get("/:id", r.handler.GetCrequestByID)
+			crequest.Put("/:id", r.handler.UpdateCrequest)
+			crequest.Delete("/:id", r.handler.DeleteCrequest)
 		}
 
 	}
