@@ -26,3 +26,7 @@ func (cr *CrequestRepository) CreateCrequest(crequest models.Crequests) error {
 func (cr *CrequestRepository) GetCrequestByID(id uint) (*models.Crequests, error) {
 	return nil, nil
 }
+
+func (cr *CrequestRepository) UpdateCrequest(db *gorm.DB) error {
+	return nil
+}
