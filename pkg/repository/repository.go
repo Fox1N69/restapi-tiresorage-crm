@@ -1,7 +1,6 @@
 package repository
 
 import (
-
 	"gorm.io/gorm"
 )
 
@@ -18,5 +17,3 @@ func NewMainRepository(db *gorm.DB) *MainRepository {
 		Crequest: NewCrequestRepository(db),
 	}
 }
-
-
