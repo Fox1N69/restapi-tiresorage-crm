@@ -22,11 +22,11 @@ func NewCrequestRepository(db *gorm.DB) *CrequestRepository {
 	return &CrequestRepository{db: db}
 }
 
-func (cr *CrequestRepository) CreateCrequest(crequest models.Crequests) error {
+func (cr *CrequestRepository) CreateCrequest(crequest *models.Crequests) error {
 	if cr == nil {
 		return errors.New("CrequestRepository is null")
 	}
-	return cr.db.Create(&crequest).Error
+	return cr.db.Create(crequest).Error
 }
 
 func (cr *CrequestRepository) GetCrequestByID(id uint) (*models.Crequests, error) {
