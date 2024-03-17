@@ -2,6 +2,8 @@ package routers
 
 import (
 	"crud-crm/pkg/handlers"
+	"crud-crm/pkg/middlewares"
+
 	//"crud-crm/pkg/repository"
 
 	"github.com/gofiber/fiber/v3"
@@ -9,7 +11,8 @@ import (
 
 // создание структуры router с полем handler
 type Router struct {
-	handler  handlers.Handler
+	handler     handlers.Handler
+	middlewares *middlewares.Middlewares
 	//mainRepo repository.MainRepository
 }
 
@@ -22,6 +25,7 @@ func NewRouter(h handlers.Handler) *Router {
 func (r *Router) RouterSetup(app *fiber.App) {
 	auth := app.Group("/auth")
 	{
+		auth.Use(r.middlewares.Auth)
 		auth.Post("/register", r.handler.Register)
 		auth.Post("/login", r.handler.Login)
 		auth.Post("/logout", r.handler.Logout)

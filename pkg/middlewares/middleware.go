@@ -4,6 +4,6 @@ type Middlewares struct {
 	Auth *AuthMiddleware
 }
 
-func NewMiddlewares() *Middlewares {
-	return &Middlewares{Auth: NewAuthMiddleware()}
+func NewMiddlewares(Auth *AuthMiddleware) *Middlewares {
+	return &Middlewares{Auth: Auth}
 }
