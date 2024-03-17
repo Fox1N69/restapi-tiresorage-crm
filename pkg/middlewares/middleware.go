@@ -1,11 +1,9 @@
 package middlewares
 
-import (
-	
-)
-
-type Middleware struct {
-	
+type Middlewares struct {
+	Auth *AuthMiddleware
 }
 
-
+func NewMiddlewares() *Middlewares {
+	return &Middlewares{Auth: NewAuthMiddleware()}
+}
