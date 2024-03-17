@@ -26,16 +26,17 @@ func NewAuthController(db *gorm.DB) *AuthController {
 
 func (ac *AuthController) GenerateToken(c fiber.Ctx) error {
 	var user models.User
-	if err := database.DB.Where("username = ?", c.FormValue("username")).First(&user).Error; err != nil {
+	if err := ac.DB.Where("username = ?", c.FormValue("username")).First(&user).Error; err != nil {
 		return err
 	}
-	if user.Password != c.FormValue("password") {
+
+	if err := bcrypt.CompareHashAndPassword(user.Password, []byte(c.FormValue("password"))); err != nil {
 		return fiber.ErrUnauthorized
 	}
 
-
 	return c.JSON(fiber.Map{"token": ""})
 }
+
 
 func (ac *AuthController) issueToken(userID uint) (string, error) {
 	token, err := ac.GenerateToken(userID)
