@@ -1,11 +1,7 @@
 package controllers
 
 import (
-	"crud-crm/pkg/models"
-	"encoding/json"
-
 	"github.com/gofiber/fiber/v3"
-	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )
 
@@ -22,7 +18,6 @@ type AuthControllerI interface {
 func NewAuthController(db *gorm.DB) *AuthController {
 	return &AuthController{DB: db}
 }
-
 
 func (ac *AuthController) Login(c fiber.Ctx) error {
 	return nil
