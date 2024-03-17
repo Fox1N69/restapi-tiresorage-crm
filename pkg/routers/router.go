@@ -2,7 +2,7 @@ package routers
 
 import (
 	"crud-crm/pkg/handlers"
-	"crud-crm/pkg/repository"
+	//"crud-crm/pkg/repository"
 
 	"github.com/gofiber/fiber/v3"
 )
@@ -10,7 +10,7 @@ import (
 // создание структуры router с полем handler
 type Router struct {
 	handler  handlers.Handler
-	mainRepo repository.MainRepository
+	//mainRepo repository.MainRepository
 }
 
 // новый экземпляр типа router с обработчиком handler
