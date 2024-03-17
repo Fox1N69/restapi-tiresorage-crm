@@ -12,3 +12,8 @@ func (h *Handler) Login(c fiber.Ctx) error {
 func (h *Handler) Logout(c fiber.Ctx) error {
 	return nil
 }
+
+func (h *Handler) GetUsers(c fiber.Ctx) error {
+	return nil
+}
+
