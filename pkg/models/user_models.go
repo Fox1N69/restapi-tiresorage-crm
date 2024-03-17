@@ -5,3 +5,7 @@ type User struct {
 	Username string `json:"username"`
 	Password []byte `json:"password"`
 }
+
+func GenerateToken() {
+	
+}
