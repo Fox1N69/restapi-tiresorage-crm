@@ -25,7 +25,7 @@ func NewRouter(h handlers.Handler) *Router {
 func (r *Router) RouterSetup(app *fiber.App) {
 	auth := app.Group("/auth")
 	{
-		auth.Use(r.middlewares.Auth)
+		auth.Use(r.middlewares.Auth.LoginMiddleware)
 		auth.Post("/register", r.handler.Register)
 		auth.Post("/login", r.handler.Login)
 		auth.Post("/logout", r.handler.Logout)

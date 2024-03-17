@@ -6,14 +6,13 @@ type AuthMiddleware struct {
 }
 
 type AuthMiddlewareI interface {
-	AuthMiddlware(c fiber.Ctx) error
+	LoginMiddleware(c fiber.Ctx) error
 }
 
 func NewAuthMiddleware() *AuthMiddleware {
 	return &AuthMiddleware{}
 }
 
-func (aw *AuthMiddleware) AuthMiddleware(c fiber.Ctx) error {
-
+func (aw *AuthMiddleware) LoginMiddleware(c fiber.Ctx) error {
 	return nil
 }
