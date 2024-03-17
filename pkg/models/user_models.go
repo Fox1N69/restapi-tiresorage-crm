@@ -6,6 +6,3 @@ type User struct {
 	Password []byte `json:"password"`
 }
 
-func GenerateToken() {
-	
-}

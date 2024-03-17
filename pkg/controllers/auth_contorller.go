@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"crud-crm/pkg/database"
 	"crud-crm/pkg/models"
 	"encoding/json"
 
@@ -17,15 +18,27 @@ type AuthControllerI interface {
 	Login(c fiber.Ctx) error
 	Register(c fiber.Ctx) error
 	Logout(c fiber.Ctx) error
-	issueToken(id uint) (string, error)
 }
 
 func NewAuthController(db *gorm.DB) *AuthController {
 	return &AuthController{DB: db}
 }
 
+func (ac *AuthController) GenerateToken(c fiber.Ctx) error {
+	var user models.User
+	if err := database.DB.Where("username = ?", c.FormValue("username")).First(&user).Error; err != nil {
+		return err
+	}
+	if user.Password != c.FormValue("password") {
+		return fiber.ErrUnauthorized
+	}
+
+
+	return c.JSON(fiber.Map{"token": ""})
+}
+
 func (ac *AuthController) issueToken(userID uint) (string, error) {
-	token, err := models.GenerateToken(userID)
+	token, err := ac.GenerateToken(userID)
 	if err != nil {
 		return "", err
 	}
