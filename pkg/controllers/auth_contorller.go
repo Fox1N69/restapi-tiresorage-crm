@@ -25,7 +25,7 @@ func NewAuthController(db *gorm.DB) *AuthController {
 
 
 func (ac *AuthController) Login(c fiber.Ctx) error {
-	retuner nil
+	return nil
 }
 
 func (ac *AuthController) Register(c fiber.Ctx) error {
