@@ -22,7 +22,7 @@ func NewAuthReposit(db *gorm.DB) *AuthRepository {
 }
 
 func (ar *AuthRepository) CreateUser(user *models.User) error {
-	return nil
+	return ar.DB.Create(user).Error
 }
 
 func (ar *AuthRepository) GetUserByID(id uint) (models.User, error) {
