@@ -17,7 +17,7 @@ func main() {
 	handler := handlers.NewHandler(*mainRepo)
 
 	app := fiber.New(fiber.Config{
-		ServerHeader: "Fiber",
+		ServerHeader: "Storage-CRM",
 	})
 
 	router := routers.NewRouter(*handler)
