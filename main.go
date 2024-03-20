@@ -7,6 +7,7 @@ import (
 	"crud-crm/pkg/routers"
 
 	"github.com/gofiber/fiber/v3"
+	"github.com/gofiber/fiber/v3/middleware/cors"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -19,6 +20,11 @@ func main() {
 	app := fiber.New(fiber.Config{
 		ServerHeader: "Storage-CRM",
 	})
+
+	app.Use(cors.New(cors.Config{
+		AllowOrigins: "https://gofiber.io, https://gofiber.net",
+		AllowHeaders: "Origin, Content-Type, Accept",
+	}))
 
 	router := routers.NewRouter(*handler)
 	router.RouterSetup(app)

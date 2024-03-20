@@ -7,11 +7,11 @@ import (
 )
 
 func (h *Handler) Test(c fiber.Ctx) error {
-	data := new(struct {
+	data := struct {
 		Message string `json:"message"`
-	})
+	}{}
 
-	if err := json.Unmarshal(c.Body(), data); err != nil {
+	if err := json.Unmarshal(c.Body(), &data); err != nil {
 		return err
 	}
 
