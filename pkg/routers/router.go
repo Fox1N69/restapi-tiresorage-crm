@@ -23,9 +23,10 @@ func NewRouter(h handlers.Handler) *Router {
 
 // метод запускается на экзмепляре router и устанавливает маршруты для fiber.app
 func (r *Router) RouterSetup(app *fiber.App) {
+	app.Post("/test", r.handler.Test)
+
 	auth := app.Group("/auth")
 	{
-		auth.Use(r.middlewares.Auth.LoginMiddleware)
 		auth.Post("/register", r.handler.Register)
 		auth.Post("/login", r.handler.Login)
 		auth.Post("/logout", r.handler.Logout)
