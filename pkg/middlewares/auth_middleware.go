@@ -1,6 +1,11 @@
 package middlewares
 
-import "github.com/gofiber/fiber/v3"
+import (
+	"crud-crm/pkg/models"
+	"encoding/json"
+
+	"github.com/gofiber/fiber/v3"
+)
 
 type AuthMiddleware struct {
 }
@@ -14,5 +19,19 @@ func NewAuthMiddleware() *AuthMiddleware {
 }
 
 func (aw *AuthMiddleware) LoginMiddleware(c fiber.Ctx) error {
-	return nil
+	var login models.User
+
+	if err := json.Unmarshal(c.Body(), &login); err != nil {
+		return c.JSON(fiber.Map{
+			"message": "Invalid input data",
+		})
+	}
+
+	if login.Password == nil || login.Username == "" {
+		return c.JSON(fiber.Map{
+			"message": "Empty username or password",
+		})
+	}
+
+	return c.Next()
 }
