@@ -1,9 +1,19 @@
 package handlers
 
-import "github.com/gofiber/fiber/v3"
+import (
+	"crud-crm/pkg/models"
+	"encoding/json"
+
+	"github.com/gofiber/fiber/v3"
+)
 
 func (h *Handler) Register(c fiber.Ctx) error {
-	
+	data := new(models.User)
+
+	if err := json.Unmarshal(c.Body(), data); err != nil {
+		return err
+	}
+
 	return nil
 }
 
