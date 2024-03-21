@@ -2,11 +2,10 @@ package controllers
 
 import "gorm.io/gorm"
 
-
 type Controllers struct {
-	authCont *AuthController
+	Auth *AuthController
 }
 
 func NewControllers(db *gorm.DB) *Controllers {
-	return &Controllers{authCont: NewAuthController(db)}
+	return &Controllers{Auth: NewAuthController(db)}
 }

@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"crud-crm/pkg/models"
+	"encoding/json"
 	"time"
 
 	"github.com/gofiber/fiber/v3"
@@ -17,6 +18,7 @@ type AuthControllerI interface {
 	Login(c fiber.Ctx) error
 	Register(c fiber.Ctx) error
 	Logout(c fiber.Ctx) error
+	GetUser(c fiber.Ctx) error
 	GenerateToken(user *models.User) (string, error)
 	VerifyToken(tokenString string) (*jwt.Token, error)
 }
@@ -39,6 +41,18 @@ func (ac *AuthController) Register(c fiber.Ctx) error {
 
 func (ac *AuthController) Logout(c fiber.Ctx) error {
 	return nil
+}
+
+func (ac *AuthController) GetUsers(c fiber.Ctx) error {
+	var user models.User
+
+	if err := json.Unmarshal(c.Body(), &user); err != nil {
+		return c.JSON(fiber.Map{
+			err.Error(): "error unmarshl body",
+		})
+	}
+
+	return c.JSON(&user)
 }
 
 // Generate jwt token

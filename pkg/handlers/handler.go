@@ -9,15 +9,15 @@ import (
 // Создание типа Handler
 type Handler struct {
 	//Добавляем поле mainRepo
-	repository *repository.MainRepository
-	controller *controllers.Controllers
+	repository repository.MainRepository
+	controller controllers.Controllers
 }
 
 // Создаем новый экземпляр Handler
 func NewHandler(mainRepo repository.MainRepository, controller controllers.Controllers) *Handler {
 	return &Handler{
-		repository: &mainRepo,
-		controller: &controller,
+		repository: mainRepo,
+		controller: controller,
 	}
 }
 
