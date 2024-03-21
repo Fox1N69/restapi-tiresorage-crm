@@ -28,8 +28,6 @@ func (ac *AuthController) Login(c fiber.Ctx) error {
 }
 
 func (ac *AuthController) Register(c fiber.Ctx) error {
-	var data models.User
-
 	return nil
 }
 
