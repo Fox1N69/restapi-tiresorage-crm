@@ -22,7 +22,7 @@ func (h *Handler) CreateClient(c fiber.Ctx) error {
 		return err
 	}
 
-	if err := h.mainRepo.Client.CreateClient(client); err != nil {
+	if err := h.repository.Client.CreateClient(client); err != nil {
 		panic(err)
 	}
 
@@ -42,7 +42,7 @@ func (h *Handler) GetClientByID(c fiber.Ctx) error {
 		return err
 	}
 
-	user, err := h.mainRepo.Client.GetClientByID(clientID)
+	user, err := h.repository.Client.GetClientByID(clientID)
 	if err != nil {
 		panic(err)
 	}
@@ -63,7 +63,7 @@ func (h *Handler) UpdateClient(c fiber.Ctx) error {
 		return err
 	}
 
-	exitClient, err := h.mainRepo.Client.GetClientByID(clientID)
+	exitClient, err := h.repository.Client.GetClientByID(clientID)
 	if err != nil {
 		return err
 	}
@@ -72,7 +72,7 @@ func (h *Handler) UpdateClient(c fiber.Ctx) error {
 		return err
 	}
 
-	if err := h.mainRepo.Client.UpdateClient(exitClient); err != nil {
+	if err := h.repository.Client.UpdateClient(exitClient); err != nil {
 		return err
 	}
 
@@ -93,12 +93,12 @@ func (h *Handler) DeleteClient(c fiber.Ctx) error {
 		return err
 	}
 
-	exitClient, err := h.mainRepo.Client.GetClientByID(clientID)
+	exitClient, err := h.repository.Client.GetClientByID(clientID)
 	if err != nil {
 		return err
 	}
 
-	if err := h.mainRepo.Client.DeleteClient(exitClient); err != nil {
+	if err := h.repository.Client.DeleteClient(exitClient); err != nil {
 		return err
 	}
 

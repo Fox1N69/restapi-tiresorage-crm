@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crud-crm/pkg/controllers"
 	"crud-crm/pkg/database"
 	"crud-crm/pkg/handlers"
 	"crud-crm/pkg/repository"
@@ -15,7 +16,8 @@ func main() {
 	db := database.GetDB()
 
 	mainRepo := repository.NewMainRepository(db)
-	handler := handlers.NewHandler(*mainRepo)
+	controller := controllers.NewControllers(db)
+	handler := handlers.NewHandler(*mainRepo, *controller)
 
 	app := fiber.New(fiber.Config{
 		ServerHeader: "Storage-CRM",

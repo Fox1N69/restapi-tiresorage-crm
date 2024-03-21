@@ -25,7 +25,7 @@ func (h *Handler) CreateCrequest(c fiber.Ctx) error {
 		return err
 	}
 
-	if err := h.mainRepo.Crequest.CreateCrequest(data); err != nil {
+	if err := h.repository.Crequest.CreateCrequest(data); err != nil {
 		return err
 	}
 	return c.JSON(data)
@@ -42,7 +42,7 @@ func (h *Handler) GetCrequestByID(c fiber.Ctx) error {
 		return err
 	}
 
-	crequest, err := h.mainRepo.Crequest.GetCrequestByID(creqID)
+	crequest, err := h.repository.Crequest.GetCrequestByID(creqID)
 	if err != nil {
 		return err
 	}

@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"crud-crm/pkg/controllers"
 	"crud-crm/pkg/repository"
 	"strconv"
 )
@@ -8,12 +9,16 @@ import (
 // Создание типа Handler
 type Handler struct {
 	//Добавляем поле mainRepo
-	mainRepo repository.MainRepository
+	repository *repository.MainRepository
+	controller *controllers.Controllers
 }
 
 // Создаем новый экземпляр Handler
-func NewHandler(mainRepo repository.MainRepository) *Handler {
-	return &Handler{mainRepo: mainRepo}
+func NewHandler(mainRepo repository.MainRepository, controller controllers.Controllers) *Handler {
+	return &Handler{
+		repository: &mainRepo,
+		controller: &controller,
+	}
 }
 
 func (h *Handler) ConvertUint(str string) (uint, error) {
