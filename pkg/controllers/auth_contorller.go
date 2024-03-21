@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"crud-crm/pkg/models"
+	"crud-crm/pkg/repository"
 	"encoding/json"
 	"time"
 
@@ -11,7 +12,8 @@ import (
 )
 
 type AuthController struct {
-	DB *gorm.DB
+	DB         *gorm.DB
+	repository repository.AuthRepository
 }
 
 type AuthControllerI interface {
@@ -24,7 +26,7 @@ type AuthControllerI interface {
 }
 
 func NewAuthController(db *gorm.DB) *AuthController {
-	return &AuthController{DB: db}
+	return &AuthController{DB: db, repository: repository.AuthRepository{}}
 }
 
 const (
@@ -36,7 +38,25 @@ func (ac *AuthController) Login(c fiber.Ctx) error {
 }
 
 func (ac *AuthController) Register(c fiber.Ctx) error {
-	return nil
+	var user models.User
+
+	if err := json.Unmarshal(c.Body(), &user); err != nil {
+		return err
+	}
+
+	if err := ac.repository.CreateUser(&user); err != nil {
+		return err
+	}
+
+	token, err := ac.GenerateToken(&user)
+	if err != nil {
+		return err
+	}
+
+	return c.JSON(fiber.Map{
+		"message": "user create",
+		"token":   token,
+	})
 }
 
 func (ac *AuthController) Logout(c fiber.Ctx) error {
