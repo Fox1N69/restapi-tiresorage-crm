@@ -5,12 +5,23 @@ import (
 	"encoding/json"
 
 	"github.com/gofiber/fiber/v3"
+	"github.com/golang-jwt/jwt/v4"
+	"golang.org/x/oauth2/jwt"
 )
 
-func (h *Handler) Register(c fiber.Ctx) error {
-	data := new(models.User)
+type Claims struct {
+	Username string `json:"username"`
+	jwt.StandardClaims
+}
 
-	if err := json.Unmarshal(c.Body(), data); err != nil {
+func (h *Handler) Register(c fiber.Ctx) error {
+	var user models.User
+
+	if err := json.Unmarshal(c.Body(), &user); err != nil {
+		return err
+	}
+
+	if err := h.mainRepo.Auth.CreateUser(&user); err != nil {
 		return err
 	}
 
