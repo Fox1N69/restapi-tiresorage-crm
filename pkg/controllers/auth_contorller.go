@@ -16,6 +16,7 @@ type AuthControllerI interface {
 	Login(c fiber.Ctx) error
 	Register(c fiber.Ctx) error
 	Logout(c fiber.Ctx) error
+	PasswordCrypted(c fiber.Ctx, user *models.User) (error, []byte)
 }
 
 func NewAuthController(db *gorm.DB) *AuthController {
@@ -29,7 +30,6 @@ func (ac *AuthController) Login(c fiber.Ctx) error {
 func (ac *AuthController) Register(c fiber.Ctx) error {
 	var data models.User
 
-
 	return nil
 }
 
@@ -37,7 +37,7 @@ func (ac *AuthController) Logout(c fiber.Ctx) error {
 	return nil
 }
 
-func (ac *AuthController) PasswordCrypted(c fiber.Ctx, user *models.User) []byte {
+func (ac *AuthController) PasswordCrypted(c fiber.Ctx, user *models.User) (error, []byte) {
 	password, _ := bcrypt.GenerateFromPassword([]byte(user.Password), 14)
-	return password
+	return nil, password
 }
