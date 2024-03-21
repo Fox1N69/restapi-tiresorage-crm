@@ -1,7 +1,10 @@
 package controllers
 
 import (
+	"crud-crm/pkg/models"
+
 	"github.com/gofiber/fiber/v3"
+	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )
 
@@ -24,9 +27,17 @@ func (ac *AuthController) Login(c fiber.Ctx) error {
 }
 
 func (ac *AuthController) Register(c fiber.Ctx) error {
+	var data models.User
+
+
 	return nil
 }
 
 func (ac *AuthController) Logout(c fiber.Ctx) error {
 	return nil
+}
+
+func (ac *AuthController) PasswordCrypted(c fiber.Ctx, user *models.User) []byte {
+	password, _ := bcrypt.GenerateFromPassword([]byte(user.Password), 14)
+	return password
 }
