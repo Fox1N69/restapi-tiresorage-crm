@@ -39,7 +39,9 @@ func (h *Handler) GetUsers(c fiber.Ctx) error {
 	var user models.User
 
 	if err := json.Unmarshal(c.Body(), &user); err != nil {
-		return err
+		return c.JSON(fiber.Map{
+			err.Error(): "error unmarshl body",
+		})
 	}
 
 	return c.JSON(&user)
