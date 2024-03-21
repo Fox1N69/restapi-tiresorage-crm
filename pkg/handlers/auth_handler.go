@@ -6,7 +6,6 @@ import (
 
 	"github.com/gofiber/fiber/v3"
 	"github.com/golang-jwt/jwt/v4"
-	"golang.org/x/oauth2/jwt"
 )
 
 type Claims struct {
@@ -37,5 +36,11 @@ func (h *Handler) Logout(c fiber.Ctx) error {
 }
 
 func (h *Handler) GetUsers(c fiber.Ctx) error {
-	return nil
+	var user models.User
+
+	if err := json.Unmarshal(c.Body(), &user); err != nil {
+		return err
+	}
+
+	return c.JSON(&user)
 }
