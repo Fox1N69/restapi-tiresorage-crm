@@ -19,7 +19,7 @@ func InitGormDB() *gorm.DB {
 	}
 	logrus.Infoln("Database connect...")
 
-	DB.AutoMigrate(&models.Client{}, &models.User{})
+	DB.AutoMigrate(&models.Client{}, &models.User{}, &models.Crequests{})
 	DB.Exec("ALTER SEQUENCE clients_id_seq RESTART WITH 1")
 
 	return DB

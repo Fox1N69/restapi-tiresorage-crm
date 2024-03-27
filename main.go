@@ -23,10 +23,7 @@ func main() {
 		ServerHeader: "Storage-CRM",
 	})
 
-	app.Use(cors.New(cors.Config{
-		AllowOrigins: "https://gofiber.io, https://gofiber.net",
-		AllowHeaders: "Origin, Content-Type, Accept",
-	}))
+	app.Use(cors.New())
 
 	router := routers.NewRouter(*handler)
 	router.RouterSetup(app)
