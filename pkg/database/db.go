@@ -12,7 +12,7 @@ import (
 var DB *gorm.DB
 
 func InitGormDB() *gorm.DB {
-	dsn := "user=postgres password=8008 dbname=deplom-makar port=5432 sslmode=disable"
+	dsn := "postgres://root:LLBHjXo4ieF2rDjyycbLn9TL2Ywl4esq@dpg-cp3k278l6cac73f78clg-a.frankfurt-postgres.render.com/deplom"
 	DB, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		logrus.Fatal("Connect database ", err)

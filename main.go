@@ -6,6 +6,7 @@ import (
 	"crud-crm/pkg/handlers"
 	"crud-crm/pkg/repository"
 	"crud-crm/pkg/routers"
+	"crud-crm/pkg/service"
 
 	"github.com/gofiber/fiber/v3"
 	"github.com/gofiber/fiber/v3/middleware/cors"
@@ -17,7 +18,8 @@ func main() {
 
 	mainRepo := repository.NewMainRepository(db)
 	controller := controllers.NewControllers(db)
-	handler := handlers.NewHandler(*mainRepo, *controller)
+	service := service.NewCrequestSerivce(mainRepo.Crequest)
+	handler := handlers.NewHandler(*mainRepo, *controller, *service)
 
 	app := fiber.New(fiber.Config{
 		ServerHeader: "Storage-CRM",

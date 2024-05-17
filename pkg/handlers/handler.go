@@ -3,6 +3,7 @@ package handlers
 import (
 	"crud-crm/pkg/controllers"
 	"crud-crm/pkg/repository"
+	"crud-crm/pkg/service"
 	"strconv"
 )
 
@@ -11,13 +12,15 @@ type Handler struct {
 	//Добавляем поле mainRepo
 	repository repository.MainRepository
 	controller controllers.Controllers
+	service service.CrequestService
 }
 
 // Создаем новый экземпляр Handler
-func NewHandler(mainRepo repository.MainRepository, controller controllers.Controllers) *Handler {
+func NewHandler(mainRepo repository.MainRepository, controller controllers.Controllers, service service.CrequestService) *Handler {
 	return &Handler{
 		repository: mainRepo,
 		controller: controller,
+		service: service,
 	}
 }
 
