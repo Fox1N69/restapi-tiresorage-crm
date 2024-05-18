@@ -98,6 +98,14 @@ func (h *Handler) UpdateCrequest(c fiber.Ctx) error {
 		crequest.Price = updateCrequest.Price
 	}
 
+	if updateCrequest.IsPaid != "" {
+		crequest.IsPaid = updateCrequest.IsPaid
+	}
+
+	if updateCrequest.Status != "" {
+		crequest.Status = updateCrequest.Status
+	}
+
 	if err := h.service.UpdatePost(id, crequest); err != nil {
 		return c.JSON(http.StatusBadRequest, "Failed to update post")
 	}
