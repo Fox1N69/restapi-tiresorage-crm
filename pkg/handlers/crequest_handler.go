@@ -89,7 +89,7 @@ func (h *Handler) UpdateCrequest(c fiber.Ctx) error {
 	if updateCrequest.FIO != "" {
 		crequest.FIO = updateCrequest.FIO
 	}
-	
+
 	if updateCrequest.Data != "" {
 		crequest.Data = updateCrequest.Data
 	}
@@ -114,5 +114,24 @@ func (h *Handler) UpdateCrequest(c fiber.Ctx) error {
 }
 
 func (h *Handler) DeleteCrequest(c fiber.Ctx) error {
-	return nil
+	idParam := c.Params("id")
+
+	//convert param id to uint
+	id, err := stringToUint(idParam)
+	if err != nil {
+		return c.JSON(400, "Invalid ID")
+	}
+
+	crequest, err := h.repository.Crequest.GetCrequestByID(id)
+	if err != nil {
+		return c.Status(500).JSON(fiber.Map{"error": "Не удалось получить Crequest"})
+	}
+
+	if err := h.repository.Crequest.DeleteCrequest(*crequest); err != nil {
+		return c.JSON(400, "Error delete crequest")
+	}
+
+	return c.JSON(fiber.Map{
+		"message": "delete successfully",
+	})
 }
