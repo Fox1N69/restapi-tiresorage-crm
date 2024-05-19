@@ -90,10 +90,6 @@ func (h *Handler) UpdateCrequest(c fiber.Ctx) error {
 		crequest.FIO = updateCrequest.FIO
 	}
 
-	if updateCrequest.Data != "" {
-		crequest.Data = updateCrequest.Data
-	}
-
 	if updateCrequest.Price != "" {
 		crequest.Price = updateCrequest.Price
 	}

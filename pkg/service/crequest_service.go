@@ -21,7 +21,8 @@ func (s *CrequestService) UpdatePost(id uint, creq *models.Crequests) error {
 
 	//update message fields based on recaving data
 	extCreq.FIO = creq.FIO
-	extCreq.Data = creq.Data
+	extCreq.ArrivalDate = creq.ArrivalDate
+	extCreq.DeliveryDate = creq.DeliveryDate
 	extCreq.IsPaid = creq.IsPaid
 	extCreq.Price = creq.Price
 	extCreq.Status = creq.Status
