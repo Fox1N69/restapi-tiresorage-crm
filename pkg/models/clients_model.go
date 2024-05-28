@@ -1,8 +1,9 @@
 package models
 
 type Client struct {
-	ID          uint   `json:"id" gorm:"primaryKey; autoIncrement:true"`
+	ID          uint   `json:"id"`
 	FIO         string `json:"fio"`
 	Email       string `json:"email"`
 	PhoneNumber string `json:"phoneNumber"`
+	LastVisit   string `json:"last_visit"`
 }
