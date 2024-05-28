@@ -15,15 +15,14 @@ func (h *Handler) GetAllClients(c fiber.Ctx) error {
 	return c.JSON(clients)
 }
 
-
 func (h *Handler) CreateClient(c fiber.Ctx) error {
 	client := new(models.Client)
-	if err := json.Unmarshal(c.Body(), &client); err != nil {
+	if err := json.Unmarshal(c.Body(), client); err != nil {
 		return err
 	}
 
 	if err := h.repository.Client.CreateClient(client); err != nil {
-		panic(err)
+		return c.JSON(err)
 	}
 
 	return c.JSON(client)
