@@ -5,5 +5,5 @@ type Client struct {
 	FIO         string `json:"fio"`
 	Email       string `json:"email"`
 	PhoneNumber string `json:"phoneNumber"`
-	LastVisit   string `json:"last_visit"`
+	LastVisit   string `json:"lastVisit"`
 }
