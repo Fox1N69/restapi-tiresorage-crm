@@ -28,6 +28,17 @@ func (h *Handler) CreateClient(c fiber.Ctx) error {
 	return c.JSON(client)
 }
 
+func (h *Handler) GetClientByBranch(c fiber.Ctx) error {
+	branch := c.Params("branch")
+
+	client, err := h.repository.Client.GetClientByBranch(branch)
+	if err != nil {
+		return err
+	}
+
+	return c.JSON(client)
+}
+
 func (h *Handler) GetClientByID(c fiber.Ctx) error {
 	id := c.Params("id")
 	if id == "" {
@@ -43,7 +54,7 @@ func (h *Handler) GetClientByID(c fiber.Ctx) error {
 
 	user, err := h.repository.Client.GetClientByID(clientID)
 	if err != nil {
-		panic(err)
+		return err
 	}
 
 	return c.JSON(user)

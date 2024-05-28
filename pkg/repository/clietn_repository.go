@@ -38,6 +38,16 @@ func (r *ClientRepository) GetClientByID(id uint) (*models.Client, error) {
 	return &client, nil
 }
 
+func (r *ClientRepository) GetClientByBranch(branch string) ([]models.Client, error) {
+	var client []models.Client
+
+	if err := r.db.Where("branch = ?", branch).Find(&client).Error; err != nil {
+		return nil, err
+	}
+
+	return client, nil
+}
+
 func (r *ClientRepository) UpdateClient(client *models.Client) error {
 	return r.db.Save(&client).Error
 }

@@ -30,6 +30,17 @@ func (h *Handler) GetAllCrequests(c fiber.Ctx) error {
 	return c.JSON(data)
 }
 
+func (h *Handler) GetCrequestByBranch(c fiber.Ctx) error {
+	branch := c.Params("branch")
+
+	crequest, err := h.repository.Crequest.GetCrequestByBranch(branch)
+	if err != nil {
+		return err
+	}
+
+	return c.JSON(crequest)
+}
+
 func (h *Handler) CreateCrequest(c fiber.Ctx) error {
 	data := new(models.Crequests)
 

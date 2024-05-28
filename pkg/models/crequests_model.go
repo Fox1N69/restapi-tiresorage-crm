@@ -4,6 +4,7 @@ import "time"
 
 type Crequests struct {
 	ID           uint      `json:"id"`
+	Branch       string    `json:"branch"`
 	FIO          string    `json:"fio"`
 	StorageCell  int       `json:"storage_cell"`
 	DiskSize     int       `json:"disk_size"`

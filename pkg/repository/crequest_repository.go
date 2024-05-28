@@ -29,6 +29,16 @@ func (cr *CrequestRepository) CreateCrequest(crequest *models.Crequests) error {
 	return cr.db.Create(crequest).Error
 }
 
+func (cr *CrequestRepository) GetCrequestByBranch(branch string) ([]models.Crequests, error) {
+	var crequest []models.Crequests
+
+	if err := cr.db.Where("branch = ?", branch).Find(&crequest).Error; err != nil {
+		return nil, err
+	}
+
+	return crequest, nil
+}
+
 func (cr *CrequestRepository) GetCrequestByID(id uint) (*models.Crequests, error) {
 	var crequest models.Crequests
 	if err := cr.db.Where("id = ?", id).First(&crequest).Error; err != nil {

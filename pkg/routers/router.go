@@ -41,6 +41,7 @@ func (r *Router) RouterSetup(app *fiber.App) {
 			client.Get("/:id", r.handler.GetClientByID)
 			client.Put("/:id", r.handler.UpdateClient)
 			client.Delete("/:id", r.handler.DeleteClient)
+			client.Get("/branch/:branch", r.handler.GetClientByBranch)
 		}
 		crequest := api.Group("/crequest")
 		{
@@ -49,6 +50,7 @@ func (r *Router) RouterSetup(app *fiber.App) {
 			crequest.Get("/:id", r.handler.GetCrequestByID)
 			crequest.Put("/:id", r.handler.UpdateCrequest)
 			crequest.Delete("/:id", r.handler.DeleteCrequest)
+			crequest.Get("/branch/:branch", r.handler.GetCrequestByBranch)
 		}
 
 	}
