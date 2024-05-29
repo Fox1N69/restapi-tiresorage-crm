@@ -87,7 +87,7 @@ func (h *Handler) UpdateCrequest(c fiber.Ctx) error {
 	}
 
 	var updateCrequest models.Crequests
-	if err := json.Unmarshal(c.Body(), &crequest); err != nil {
+	if err := json.Unmarshal(c.Body(), &updateCrequest); err != nil {
 		return err
 	}
 
@@ -119,8 +119,8 @@ func (h *Handler) UpdateCrequest(c fiber.Ctx) error {
 		crequest.Status = updateCrequest.Status
 	}
 
-	if err := h.service.UpdatePost(id, crequest); err != nil {
-		return c.JSON(http.StatusBadRequest, "Failed to update post")
+	if err := h.repository.Crequest.UpdateCrequest(*crequest); err != nil {
+		return c.JSON(http.StatusBadRequest, "Failed to update crequest")
 	}
 
 	return c.JSON(crequest)
