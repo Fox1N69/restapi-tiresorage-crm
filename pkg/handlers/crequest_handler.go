@@ -76,7 +76,6 @@ func (h *Handler) GetCrequestByID(c fiber.Ctx) error {
 func (h *Handler) UpdateCrequest(c fiber.Ctx) error {
 	idParam := c.Params("id")
 
-	//convert param id to uint
 	id, err := stringToUint(idParam)
 	if err != nil {
 		return c.JSON(400, "Invalid ID")
@@ -92,13 +91,20 @@ func (h *Handler) UpdateCrequest(c fiber.Ctx) error {
 		return err
 	}
 
-	// Обновление полей на основе входящих данных
 	if updateCrequest.ID != 0 {
 		crequest.ID = updateCrequest.ID
 	}
 
 	if updateCrequest.FIO != "" {
 		crequest.FIO = updateCrequest.FIO
+	}
+
+	if updateCrequest.StorageCell != "" {
+		crequest.StorageCell = updateCrequest.StorageCell
+	}
+
+	if updateCrequest.DiskSize != "" {
+		crequest.DiskSize = updateCrequest.DiskSize
 	}
 
 	if updateCrequest.Price != "" {
