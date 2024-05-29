@@ -86,9 +86,7 @@ func (h *Handler) UpdateClient(c fiber.Ctx) error {
 		return err
 	}
 
-	return c.Status(200).JSON(fiber.Map{
-		"message": "client seccessfully change",
-	})
+	return c.JSON("update")
 }
 
 func (h *Handler) DeleteClient(c fiber.Ctx) error {

@@ -16,6 +16,7 @@ type CrequestRepositoryI interface {
 	GetCrequestByID(id uint) (*models.Crequests, error)
 	UpdateCrequest(crequest models.Crequests) error
 	DeleteCrequest(crequest models.Crequests) error
+	GetCrequestByFIO(crequest models.Crequests) (*models.Crequests, error)
 }
 
 func NewCrequestRepository(db *gorm.DB) *CrequestRepository {
@@ -37,6 +38,15 @@ func (cr *CrequestRepository) GetCrequestByBranch(branch string) ([]models.Crequ
 	}
 
 	return crequest, nil
+}
+
+func (cr *CrequestRepository) GetCrequestByFIO(fio string) (*models.Crequests, error) {
+	var crequest models.Crequests
+	result := cr.db.Where("fio = ?", fio).First(&crequest)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return &crequest, nil
 }
 
 func (cr *CrequestRepository) GetCrequestByID(id uint) (*models.Crequests, error) {

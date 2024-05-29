@@ -1,6 +1,8 @@
 package models
 
-import "time"
+import (
+	"time"
+)
 
 type Crequests struct {
 	ID           uint      `json:"id"`
