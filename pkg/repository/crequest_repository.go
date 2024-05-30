@@ -40,6 +40,13 @@ func (cr *CrequestRepository) GetCrequestByBranch(branch string) ([]models.Crequ
 	return crequest, nil
 }
 
+func (r *CrequestRepository) DeleteCrequestByID(id uint) error {
+	if err := r.db.Delete(&models.Crequests{}, id).Error; err != nil {
+		return err
+	}
+	return nil
+}
+
 func (cr *CrequestRepository) GetCrequestByFIO(fio string) (*models.Crequests, error) {
 	var crequest models.Crequests
 	result := cr.db.Where("fio = ?", fio).First(&crequest)

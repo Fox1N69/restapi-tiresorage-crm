@@ -33,3 +33,10 @@ func (c *Crequests) AfterCreate(tx *gorm.DB) (err error) {
 	}
 	return nil
 }
+
+func (c *Crequests) BeforeDelete(tx *gorm.DB) (err error) {
+	if err := tx.Where("crequest_id = ?", c.ID).Delete(&Client{}).Error; err != nil {
+		return err
+	}
+	return nil
+}

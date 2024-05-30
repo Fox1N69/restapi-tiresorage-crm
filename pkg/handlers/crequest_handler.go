@@ -5,6 +5,7 @@ import (
 	"crud-crm/pkg/models"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -147,4 +148,22 @@ func (h *Handler) DeleteCrequest(c fiber.Ctx) error {
 	return c.JSON(fiber.Map{
 		"message": "delete successfully",
 	})
+}
+
+func (h *Handler) DeleteWithClient(c fiber.Ctx) error {
+	id := c.Query("id")
+	if id == "" {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "missing id"})
+	}
+
+	crequestID, err := stringToUint(id)
+	if err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "invalid id"})
+	}
+
+	if err := h.repository.Crequest.DeleteCrequestByID(crequestID); err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
+	}
+
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{"message": fmt.Sprintf("Crequest with ID %s deleted", id)})
 }
