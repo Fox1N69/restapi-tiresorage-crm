@@ -2,6 +2,8 @@ package models
 
 import (
 	"time"
+
+	"gorm.io/gorm"
 )
 
 type Crequests struct {
@@ -17,4 +19,17 @@ type Crequests struct {
 	Price        string    `json:"price"`
 	IsPaid       string    `json:"isPaid"`
 	Status       string    `json:"status"`
+}
+
+func (c *Crequests) AfterCreate(tx *gorm.DB) (err error) {
+	client := Client{
+		FIO:        c.FIO,
+		Branch:     c.Branch,
+		LastVisit:  time.Now().Format("2006-01-02"),
+		CrequestID: c.ID,
+	}
+	if err := tx.Create(&client).Error; err != nil {
+		return err
+	}
+	return nil
 }
